@@ -1,10 +1,13 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/follow.js',
+    entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'lib'),
-        filename: 'follow.js'
+        filename: 'follow.js',
+        library: 'follow',
+        libraryTarget: 'umd',
+        umdNamedDefine: true
     },
     module: {
         rules: [{

@@ -2,9 +2,9 @@
   "name": "follow.js",
   "version": "1.0.0",
   "description": "Small library for tracking mouse movments :comet:",
-  "main": "src/follow.js",
+  "main": "lib/follow.js",
   "scripts": {
-    "dev": "./node_modules/.bin/webpack-dev-server --open",
+    "dev": "./node_modules/.bin/webpack",
     "prod": "./node_modules/.bin/webpack -p",
     "deploy": "./node_modules/.bin/webpack -p && surge ./dist/"
   },
