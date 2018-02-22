@@ -1,10 +1,35 @@
 const path = require('path');
+const env = require('yargs').argv.env;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+let filename = 'follow.js';
+let dir = 'lib';
+let plugins = [];
+
+if (env === 'prod') {
+    filename = 'follow.min.js';
+} else if (env === 'demo') {
+    filename = 'follow.min.js';
+    dir = 'demo';
+    plugins.push(new HtmlWebpackPlugin({
+        template: './index.html',
+        minify: {
+            minifyCSS: true,
+            minifyJS: true,
+            collapseWhitespace: true
+        }
+    }));
+} else if (env === undefined) {
+    plugins.push(new HtmlWebpackPlugin({
+        template: './index.html'
+    }));
+}
 
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, 'lib'),
-        filename: 'follow.js',
+        path: path.resolve(__dirname, dir),
+        filename: filename,
         library: 'follow',
         libraryTarget: 'umd',
         umdNamedDefine: true
@@ -19,5 +44,5 @@ module.exports = {
             }
         }]
     },
-    plugins: []
+    plugins: plugins
 };
