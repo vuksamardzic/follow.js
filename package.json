@@ -4,9 +4,9 @@
   "description": "Small library for tracking mouse movments :comet:",
   "main": "lib/follow.js",
   "scripts": {
-    "dev": "./node_modules/.bin/webpack",
+    "dev": "./node_modules/.bin/webpack --watch",
     "prod": "./node_modules/.bin/webpack -p",
-    "deploy": "./node_modules/.bin/webpack -p && surge ./dist/"
+    "deploy": "./node_modules/.bin/webpack -p && surge -p ./demo -d followjs.surge.sh"
   },
   "repository": {
     "type": "git",
