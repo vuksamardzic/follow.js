@@ -43,6 +43,7 @@
             margin: 5px;
             font-size: 20px;
             text-align: center;
+            transition: 0.3s all;
         }
     </style>
 </head>
@@ -65,7 +66,10 @@
 <script>
     follow.init({
         selector: '.box',
-        areas: 8
+        areas: 4,
+        type: 'text',
+        feed: ['right', 'top', 'left', 'bottom'],
+        default: 'center'
     });
 </script>
 
