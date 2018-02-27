@@ -5,8 +5,7 @@
   "main": "lib/follow.js",
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --open",
-    "prod": "./node_modules/.bin/webpack -p --env prod",
-    "build": "webpack --env dev && webpack -p --env prod",
+    "prod": "webpack --env dev && webpack -p --env prod",
     "deploy": "./node_modules/.bin/webpack -p --env demo && surge -p ./demo -d followjs.surge.sh"
   },
   "repository": {
