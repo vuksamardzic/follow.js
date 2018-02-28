@@ -24,7 +24,7 @@ Before your closing ```<body>``` tag add:
 
 ### Settings
 
-Option | Type | Default | Description
+Option | Type | Default     | Description
 ------ | ---- | ----------- | -----------
 selector | string | '.follow-el' | CSS selector.
 areas | number | 4 | Choose how wedges of a circle you want.
