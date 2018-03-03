@@ -4,9 +4,10 @@
   "description": "Small library for tracking mouse movments :comet:",
   "main": "lib/follow.js",
   "scripts": {
-    "dev": "./node_modules/.bin/webpack-dev-server --open",
-    "prod": "webpack --env dev && webpack -p --env prod",
-    "deploy": "./node_modules/.bin/webpack -p --env demo && surge -p ./demo -d followjs.surge.sh"
+    "dev": "./node_modules/.bin/webpack-dev-server --open --mode development",
+    "prod": "webpack --mode development --env dev && webpack --mode production --env prod",
+    "deploy": "./node_modules/.bin/webpack -p --env demo && surge -p ./demo -d followjs.surge.sh",
+    "init": "npm i -D babel-core babel-loader babel-preset-es2015 html-webpack-plugin webpack webpack-dev-server yargs"
   },
   "repository": {
     "type": "git",
@@ -26,11 +27,12 @@
   "homepage": "https://github.com/xemichar/follow.js#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "^7.1.3",
     "babel-preset-es2015": "^6.24.1",
-    "html-webpack-plugin": "^2.30.1",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.11.1",
+    "html-webpack-plugin": "^3.0.4",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0",
     "yargs": "^11.0.0"
   }
 }
