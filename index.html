@@ -226,13 +226,13 @@
 </body>
 
 <script>
-    let $form = document.querySelector('form');
-    let $wedges = document.getElementById('wedges');
-    let $type = document.getElementById('type');
-    let $prop = document.getElementById('prop');
-    let propEl = document.querySelector('.prop');
-    let $feed = document.getElementById('feed');
-    let $default = document.getElementById('default');
+    var $form = document.querySelector('form');
+    var $wedges = document.getElementById('wedges');
+    var $type = document.getElementById('type');
+    var $prop = document.getElementById('prop');
+    var propEl = document.querySelector('.prop');
+    var $feed = document.getElementById('feed');
+    var $default = document.getElementById('default');
 
     var $submitButton = document.querySelector('.pulse-anim');
     var $objButton = document.querySelector('.span-button');
@@ -295,7 +295,7 @@
     };
 
     var optionHTML = function (arr) {
-        let optionArr = arr.map(function (i, index) {
+        var optionArr = arr.map(function (i, index) {
             i = i.split(',').slice(0, $wedges.value);
             return '<option value="' + i + '">' + i + '</option>';
         });
