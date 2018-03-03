@@ -13,8 +13,8 @@ export let mergeOptions = (options) => {
     } else if (typeof options === 'object') {
         Object.assign(defaults, options);
         Array.from(followEl(defaults.selector)).map(el => {
-            followElArray.push(el);
             handleType(el, true);
+            followElArray.push(el);
         });
     } else if (typeof options === undefined) {
         Array.from(followEl(defaults.selector)).map(el => {
