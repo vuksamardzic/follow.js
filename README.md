@@ -18,7 +18,7 @@ Before your closing ```<body>``` tag add:
 
 ```html
 <script>
-    follow.init();
+    follow.init({...});
 </script>
 ```
 
@@ -27,10 +27,10 @@ Before your closing ```<body>``` tag add:
 Option | Type | Default | Description
 ------ | ---- | ------- | -----------
 selector | string | '.follow-el' | CSS selector.
-areas | number | 4 | Choose how wedges of a circle you want.
+areas | number | 4 | Choose how many wedges of a circle you want.
 type | string | 'text' | Choose between `'text'` and `'style'`
 prop | string | '' | Only required if option `type` is equal`'style'`. Css property written in camel casing. Example: `backgroundColor`, `borderRadius`, `color` ..
-feed | array | [] | Array of strings(text or css properties). `feed` length must be equal to number of areas.
+feed | array | [ ] | Array of strings(text or css properties). `feed` length must be equal to number of areas.
 default | string | '' | Default value on load and when mouse is over element.
 
 ### Example
