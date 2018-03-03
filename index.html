@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>follow.js</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -17,7 +17,15 @@
         body {
             min-height: 100%;
             position: relative;
-            font-family: 'Open Sans', sans-serif;
+            /* font-family: 'Open Sans', sans-serif; */
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .title {
+            font-weight: 300;
+            color: #7777f2;
+            font-size: 20px;
+            text-align: center;
         }
 
         .box-wrapper {
@@ -34,6 +42,8 @@
             line-height: 150px;
             background-color: #fff;
             border: 1px solid #b8b8b8;
+            color: #b8b8b8;
+            font-weight: 300;
             margin: 5px;
             font-size: 20px;
             text-align: center;
@@ -67,13 +77,6 @@
             display: block;
         }
 
-        .form-group span {
-            font-size: 0.7rem;
-            margin-top: 5px;
-            color: red;
-            display: block;
-        }
-
         .form-group input,
         select {
             display: block;
@@ -97,13 +100,73 @@
             padding: 0 20px;
             cursor: pointer;
         }
+
+        .pulse-anim {
+            animation: 1s pulse infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .lib-obj {
+            text-align: center;
+            margin-top: 15px;
+            display: block;
+            width: 100%;
+        }
+
+        .lib-obj p {
+            color: gray;
+            font-size: 13px;
+            line-height: 18px;
+            margin-top: 1em;
+        }
+
+        .lib-obj span.span-button {
+            display: none;
+            font-size: 13px;
+            color: #535353;
+            line-height: 18px;
+        }
+
+        .copyrights p {
+            color: #a5a5a5;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .copyrights p a {
+            color: #7b8993;
+        }
+
+        .copyrights p.author {
+            font-size: 13px;
+            color: #3d464d;
+            text-align: center;
+        }
+
+
+
+        .copyrights p.author>a {
+            font-weight: 500;
+            text-decoration: none;
+            color: #7b8993;
+        }
     </style>
 </head>
 
 <body>
     <div class="box-wrapper">
-        <div class="box"></div>
+        <div class="box">:)</div>
     </div>
+    <p class="title">Play around, it's free!</p>
     <form novalidate>
         <div class="form-group">
             <label for="wedges">Wedges</label>
@@ -139,23 +202,26 @@
         </div>
         <div class="form-group">
             <label for="feed">Feed</label>
-            <select name="feed" id="feed">
-                <option value="1,2,3,4" selected>1,2,3,4</option>
-                <option value="red,green,blue,gray">red,green,blue,gray</option>
-                <option value="right,top,left,bottom">right,top,left,bottom</option>
-            </select>
+            <select name="feed" id="feed"></select>
         </div>
         <div class="form-group">
             <label for="default">Default</label>
-            <select name="default" id="default">
-                <option value="0">0</option>
-                <option value="black">black</option>
-            </select>
+            <select name="default" id="default" disabled></select>
         </div>
         <div class="form-group">
-            <button type="submit">init</button>
+            <button type="submit" class="pulse-anim">init</button>
         </div>
-        <pre></pre>
+        <div class="lib-obj">
+            <span class="span-button">Object passed to follow.js</span>
+            <p class="pre"></p>
+        </div>
+        <div class="copyrights">
+            <p>Download
+                <a download="follow.min.js" href="https://raw.githubusercontent.com/vuksamardzic/follow.js/master/lib/follow.min.js">follow.min.js</a> or check
+                <a href="https://github.com/vuksamardzic/follow.js">GitHub</a>.</p>
+            <p class="author">Made by
+                <a href="https://github.com/vuksamardzic">Vuk Samardžić</a>.</p>
+        </div>
     </form>
 </body>
 
@@ -168,18 +234,78 @@
     let $feed = document.getElementById('feed');
     let $default = document.getElementById('default');
 
-    let backgroundColorArray = [
-        'red,blue,green,pink',
-        'lightblue,lightgray,gray,black'
-    ];
+    var $submitButton = document.querySelector('.pulse-anim');
+    var $objButton = document.querySelector('.span-button');
 
-    let optionHTML = backgroundColorArray.map((j, index) => {
-        return `<option value="${j}" ${index === 0 ? "selected" : ""}>${j}</option>`;
+    $submitButton.addEventListener('click', function (ev) {
+        this.classList.contains('pulse-anim') ? this.classList.remove('pulse-anim') : '';
+        $objButton.style.display = 'inline-block';
     });
 
-    let followOptionObj = {};
+    var styleFeedValues = {
+        backgroundColor: [
+            'lime,green,aqua,teal,blue,navy,fuchsia,purple',
+            '#24ff7f,#d57865,#c4d21c,#7e8daf,#534201,#18a2f2,#d2dff4,#c6c0c3'
+        ],
+        borderRadius: [
+            '5px,10px,15px,20px,25px,30px,35px,40px',
+            '5%,10%,15%,20%,25%,30%,35%,40%'
+        ],
+        transform: [
+            'scale(0.5),scale(0.6),scale(0.7),scale(0.8),scale(0.9),scale(1),scale(1.1),scale(1.2)',
+            'rotate(30deg),rotate(60deg),rotate(90deg),rotate(120deg),rotate(150deg),rotate(180deg),rotate(210deg),rotate(240deg)'
+        ],
+        width: [
+            '100px,120px,140px,160px,180px,200px,220px,240px'
+        ]
+    };
 
-    $form.addEventListener('submit', (ev) => {
+    var styleDefaultValues = {
+        backgroundColor: [
+            'black',
+            '#585858'
+        ],
+        borderRadius: [
+            '0',
+            '50%'
+        ],
+        transform: [
+            'scale(1.5)',
+            'rotate(0)'
+        ],
+        width: [
+            '150px'
+        ]
+    };
+
+    var textFeedValues = {
+        text: [
+            'one,two,three,four,five,six,seven,eight',
+            '1,2,3,4,5,6,7,8',
+            '100,200,300,400,500,600,700,800'
+        ]
+    };
+
+    var textDefaultValues = {
+        text: [
+            'center',
+            '0',
+            '1000'
+        ]
+    };
+
+    var optionHTML = function (arr) {
+        let optionArr = arr.map(function (i, index) {
+            i = i.split(',').slice(0, $wedges.value);
+            return '<option value="' + i + '">' + i + '</option>';
+        });
+
+        return optionArr.join('');
+    };
+
+    var followOptionObj = {};
+
+    $form.addEventListener('submit', function (ev) {
         ev.preventDefault();
         followOptionObj = {
             selector: '.box',
@@ -189,45 +315,66 @@
             feed: $feed.value.split(','),
             default: $default.value
         }
-        document.querySelector('pre').innerHTML = JSON.stringify(followOptionObj);
+        document.querySelector('.pre').innerHTML = JSON.stringify(followOptionObj);
         follow.init(followOptionObj);
     });
 
-    $wedges.addEventListener('change', (ev) => {
-
+    $wedges.addEventListener('change', function (ev) {
+        if ($type.value === 'style') {
+            supplyOptions($prop.value);
+        } else {
+            supplyTextOptions();
+        }
     });
 
-    $type.addEventListener('change', (ev) => {
+    $type.addEventListener('change', function (ev) {
         if (ev.target.value === 'style') {
             propEl.style.display = 'block';
             supplyOptions($prop.value);
         } else {
             propEl.style.display = 'none';
+            supplyTextOptions();
         }
     });
 
-    $prop.addEventListener('change', (ev) => {
-        if ($prop.value === 'backgroundColor') {
-            $feed.innerHTML = optionHTML.join('');
-        }
+    $prop.addEventListener('change', function (ev) {
+        $feed.innerHTML = optionHTML(styleFeedValues[ev.target.value]);
+        $default.innerHTML = optionHTML(styleDefaultValues[ev.target.value]);
+        $default.selectedIndex = $feed.selectedIndex;
     });
 
-    let supplyOptions = (val) => {
+    $feed.addEventListener('change', function (ev) {
+        $default.selectedIndex = ev.currentTarget.selectedIndex;
+    });
+
+    var supplyOptions = function (val) {
         switch (val) {
             case 'backgroundColor':
-                $feed.innerHTML = '';
+                $feed.innerHTML = optionHTML(styleFeedValues[val]);
+                $default.innerHTML = optionHTML(styleDefaultValues[val]);
                 break;
             case 'borderRadius':
-
+                $feed.innerHTML = optionHTML(styleFeedValues[val]);
+                $default.innerHTML = optionHTML(styleDefaultValues[val]);
                 break;
             case 'transform':
-
+                $feed.innerHTML = optionHTML(styleFeedValues[val]);
+                $default.innerHTML = optionHTML(styleDefaultValues[val]);
                 break;
             case 'width':
-
+                $feed.innerHTML = optionHTML(styleFeedValues[val]);
+                $default.innerHTML = optionHTML(styleDefaultValues[val]);
                 break;
         }
+        $default.selectedIndex = $feed.selectedIndex;
     };
+
+    var supplyTextOptions = function () {
+        $feed.innerHTML = optionHTML(textFeedValues['text']);
+        $default.innerHTML = optionHTML(textDefaultValues['text']);
+        $default.selectedIndex = $feed.selectedIndex;
+    };
+    supplyTextOptions();
 </script>
 
 </html>
