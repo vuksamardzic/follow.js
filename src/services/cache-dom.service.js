@@ -1,3 +1,3 @@
-export let followEl = (selector) => {
+export const cacheDom = (selector) => {
     return document.querySelectorAll(selector);
 }
