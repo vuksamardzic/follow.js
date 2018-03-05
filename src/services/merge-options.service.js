@@ -1,25 +1,24 @@
-import { defaults } from "../models/defaults.model";
-import { followEl } from "./cache-dom.service";
-import { followElArray } from "../models/follow-el.model";
-import { handleType } from "./handle-type.service";
+import { settings } from "../models/settings.model";
+import { cacheDom } from "./cache-dom.service";
+import { elCollection, collectionAssign, collectionClean } from "../models/el-collection.model";
 
 export let mergeOptions = (options) => {
     if (typeof options === 'string') {
-        defaults.selector = options;
-        Array.from(followEl(defaults.selector)).map(el => {
-            handleType(el, true);            
-            followElArray.push(el);
-        });
+        settings.selector = options;
+        if (elCollection.length > 0) {
+            collectionClean();
+        }
+        collectionAssign(cacheDom(settings.selector));
     } else if (typeof options === 'object') {
-        Object.assign(defaults, options);
-        Array.from(followEl(defaults.selector)).map(el => {
-            handleType(el, true);
-            followElArray.push(el);
-        });
+        Object.assign(settings, options);
+        if (elCollection.length > 0) {
+            collectionClean();
+        }
+        collectionAssign(cacheDom(settings.selector));
     } else if (typeof options === undefined) {
-        Array.from(followEl(defaults.selector)).map(el => {
-            handleType(el, true);
-            followElArray.push(el);
-        });
+        if (elCollection.length > 0) {
+            collectionClean();
+        }
+        collectionAssign(cacheDom(settings.selector));
     }
 }
