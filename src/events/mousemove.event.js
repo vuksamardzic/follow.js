@@ -1,8 +1,8 @@
-import { followElArray } from "../models/follow-el.model";
+import { elCollection } from "../models/el-collection.model";
 import { updateEl } from "../services/update-el.service";
 
 export let mouseMoveHandler = (ev) => {
-    followElArray.map(el => {
+    elCollection.map(el => {
         updateEl(el, ev);
     });
 }
