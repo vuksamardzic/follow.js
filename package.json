@@ -1,0 +1,38 @@
+{
+  "name": "follow.js",
+  "version": "1.0.0",
+  "description": "Small library for tracking mouse movments :comet:",
+  "main": "lib/follow.js",
+  "scripts": {
+    "dev": "./node_modules/.bin/webpack-dev-server --open --mode development",
+    "prod": "webpack --mode development --env dev && webpack --mode production --env prod",
+    "deploy": "./node_modules/.bin/webpack --mode production --env demo && surge -d followjs.surge.sh -p ./",
+    "init": "npm i -D babel-core babel-loader babel-preset-es2015 html-webpack-plugin webpack webpack-dev-server yargs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xemichar/follow.js.git"
+  },
+  "keywords": [
+    "follow",
+    "followjs",
+    "mousemove",
+    "mouse"
+  ],
+  "author": "Vuk Samardžić <samardzic.vuk@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xemichar/follow.js/issues"
+  },
+  "homepage": "https://github.com/xemichar/follow.js#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.3",
+    "babel-preset-es2015": "^6.24.1",
+    "html-webpack-plugin": "^3.0.4",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0",
+    "yargs": "^11.0.0"
+  }
+}
