@@ -1,1 +1,380 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>follow.js</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"><link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet"><style>*{box-sizing:border-box}body,html{min-height:100%;position:relative;font-family:Roboto,sans-serif}.title{font-weight:300;color:#7777f2;font-size:20px;text-align:center}.box-wrapper{margin:150px 0;display:block;text-align:center}.box{display:inline-block;box-sizing:border-box;width:150px;height:150px;line-height:150px;background-color:#fff;border:1px solid #b8b8b8;color:#b8b8b8;font-weight:300;margin:5px;font-size:20px;text-align:center;transition:.3s all}form{display:flex;flex-wrap:wrap;max-width:950px;justify-content:center;align-items:flex-end;margin:0 auto}.form-group{display:inline-block;margin:0 10px 10px;position:relative;max-width:200px}.form-group.prop{display:none}.form-group label{font-size:12px;margin-bottom:5px;color:#d3d3d3;display:block}.form-group input,select{display:block;font-size:13px;border:1px solid #d3d3d3;outline:0;width:150px;height:40px;line-height:40px;padding:0 10px}.form-group button{display:block;font-size:13px;border:2px solid gray;color:gray;background-color:#fff;height:40px;outline:0;padding:0 20px;cursor:pointer}.pulse-anim{animation:1s pulse infinite}@keyframes pulse{0%,100%{transform:scale(1.1)}50%{transform:scale(1)}}.lib-obj{text-align:center;margin-top:15px;display:block;width:100%}.lib-obj p{color:gray;font-size:13px;line-height:18px;margin-top:1em}.lib-obj span.span-button{display:none;font-size:13px;color:#535353;line-height:18px}.copyrights p{color:#a5a5a5;font-size:14px;font-weight:300}.copyrights p a{color:#7b8993}.copyrights p.author{font-size:13px;color:#3d464d;text-align:center}.copyrights p.author>a{font-weight:500;text-decoration:none;color:#7b8993}</style></head><body><div class="box-wrapper"><div class="box">:)</div></div><p class="title">Play around, it's free!</p><form novalidate><div class="form-group"><label for="wedges">Wedges</label> <select name="wedges" id="wedges"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected="selected">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div><div class="form-group"><label for="type">Type</label> <select name="type" id="type"><option value="text">text</option><option value="style">style</option></select></div><div class="form-group prop"><label for="prop">Property</label> <select name="prop" id="prop"><option value="backgroundColor">backgroundColor</option><option value="borderRadius">borderRadius</option><option value="transform">transform</option><option value="width">width</option></select></div><div class="form-group"><label for="feed">Feed</label> <select name="feed" id="feed"></select></div><div class="form-group"><label for="default">Default</label> <select name="default" id="default" disabled="disabled"></select></div><div class="form-group"><button type="submit" class="pulse-anim">init</button></div><div class="lib-obj"><span class="span-button">Object passed to follow.js</span><p class="pre"></p></div><div class="copyrights"><p>Download <a download="follow.min.js" href="https://raw.githubusercontent.com/vuksamardzic/follow.js/master/lib/follow.min.js">follow.min.js</a> or check <a href="https://github.com/vuksamardzic/follow.js">GitHub</a>.</p><p class="author">Made by <a href="https://github.com/vuksamardzic">Vuk Samardžić</a>.</p></div></form><script type="text/javascript" src="follow.min.js"></script></body><script>var $form=document.querySelector("form"),$wedges=document.getElementById("wedges"),$type=document.getElementById("type"),$prop=document.getElementById("prop"),propEl=document.querySelector(".prop"),$feed=document.getElementById("feed"),$default=document.getElementById("default"),$submitButton=document.querySelector(".pulse-anim"),$objButton=document.querySelector(".span-button");$submitButton.addEventListener("click",function(e){this.classList.contains("pulse-anim")&&this.classList.remove("pulse-anim"),$objButton.style.display="inline-block"});var styleFeedValues={backgroundColor:["lime,green,aqua,teal,blue,navy,fuchsia,purple","#24ff7f,#d57865,#c4d21c,#7e8daf,#534201,#18a2f2,#d2dff4,#c6c0c3"],borderRadius:["5px,10px,15px,20px,25px,30px,35px,40px","5%,10%,15%,20%,25%,30%,35%,40%"],transform:["scale(0.5),scale(0.6),scale(0.7),scale(0.8),scale(0.9),scale(1),scale(1.1),scale(1.2)","rotate(30deg),rotate(60deg),rotate(90deg),rotate(120deg),rotate(150deg),rotate(180deg),rotate(210deg),rotate(240deg)"],width:["100px,120px,140px,160px,180px,200px,220px,240px"]},styleDefaultValues={backgroundColor:["black","#585858"],borderRadius:["0","50%"],transform:["scale(1.5)","rotate(0)"],width:["150px"]},textFeedValues={text:["one,two,three,four,five,six,seven,eight","1,2,3,4,5,6,7,8","100,200,300,400,500,600,700,800"]},textDefaultValues={text:["center","0","1000"]},optionHTML=function(e){return e.map(function(e,t){return'<option value="'+(e=e.split(",").slice(0,$wedges.value))+'">'+e+"</option>"}).join("")},followOptionObj={};$form.addEventListener("submit",function(e){e.preventDefault(),followOptionObj={selector:".box",areas:parseInt($wedges.value),prop:$prop.value&&"style"===$type.value?$prop.value:void 0,type:$type.value,feed:$feed.value.split(","),default:$default.value},document.querySelector(".pre").innerHTML=JSON.stringify(followOptionObj),follow.init(followOptionObj)}),$wedges.addEventListener("change",function(e){"style"===$type.value?supplyOptions($prop.value):supplyTextOptions()}),$type.addEventListener("change",function(e){"style"===e.target.value?(propEl.style.display="block",supplyOptions($prop.value)):(propEl.style.display="none",supplyTextOptions())}),$prop.addEventListener("change",function(e){$feed.innerHTML=optionHTML(styleFeedValues[e.target.value]),$default.innerHTML=optionHTML(styleDefaultValues[e.target.value]),$default.selectedIndex=$feed.selectedIndex}),$feed.addEventListener("change",function(e){$default.selectedIndex=e.currentTarget.selectedIndex});var supplyOptions=function(e){switch(e){case"backgroundColor":case"borderRadius":case"transform":case"width":$feed.innerHTML=optionHTML(styleFeedValues[e]),$default.innerHTML=optionHTML(styleDefaultValues[e])}$default.selectedIndex=$feed.selectedIndex},supplyTextOptions=function(){$feed.innerHTML=optionHTML(textFeedValues.text),$default.innerHTML=optionHTML(textDefaultValues.text),$default.selectedIndex=$feed.selectedIndex};supplyTextOptions()</script></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>follow.js</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+            position: relative;
+            /* font-family: 'Open Sans', sans-serif; */
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .title {
+            font-weight: 300;
+            color: #7777f2;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .box-wrapper {
+            margin: 150px 0;
+            display: block;
+            text-align: center;
+        }
+
+        .box {
+            display: inline-block;
+            box-sizing: border-box;
+            width: 150px;
+            height: 150px;
+            line-height: 150px;
+            background-color: #fff;
+            border: 1px solid #b8b8b8;
+            color: #b8b8b8;
+            font-weight: 300;
+            margin: 5px;
+            font-size: 20px;
+            text-align: center;
+            transition: 0.3s all;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 950px;
+            justify-content: center;
+            align-items: flex-end;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            display: inline-block;
+            margin: 0 10px 10px;
+            position: relative;
+            max-width: 200px;
+        }
+
+        .form-group.prop {
+            display: none;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: lightgray;
+            display: block;
+        }
+
+        .form-group input,
+        select {
+            display: block;
+            font-size: 13px;
+            border: 1px solid lightgray;
+            outline: 0;
+            width: 150px;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 10px;
+        }
+
+        .form-group button {
+            display: block;
+            font-size: 13px;
+            border: 2px solid gray;
+            color: gray;
+            background-color: #fff;
+            height: 40px;
+            outline: 0;
+            padding: 0 20px;
+            cursor: pointer;
+        }
+
+        .pulse-anim {
+            animation: 1s pulse infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .lib-obj {
+            text-align: center;
+            margin-top: 15px;
+            display: block;
+            width: 100%;
+        }
+
+        .lib-obj p {
+            color: gray;
+            font-size: 13px;
+            line-height: 18px;
+            margin-top: 1em;
+        }
+
+        .lib-obj span.span-button {
+            display: none;
+            font-size: 13px;
+            color: #535353;
+            line-height: 18px;
+        }
+
+        .copyrights p {
+            color: #a5a5a5;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .copyrights p a {
+            color: #7b8993;
+        }
+
+        .copyrights p.author {
+            font-size: 13px;
+            color: #3d464d;
+            text-align: center;
+        }
+
+
+
+        .copyrights p.author>a {
+            font-weight: 500;
+            text-decoration: none;
+            color: #7b8993;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box-wrapper">
+        <div class="box">:)</div>
+    </div>
+    <p class="title">Play around, it's free!</p>
+    <form novalidate>
+        <div class="form-group">
+            <label for="wedges">Wedges</label>
+            <select name="wedges" id="wedges">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4" selected>4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="type">Type</label>
+            <select name="type" id="type">
+                <option value="text">text</option>
+                <option value="style">style</option>
+            </select>
+        </div>
+
+        <div class="form-group prop">
+            <label for="prop">Property</label>
+            <select name="prop" id="prop">
+                <option value="backgroundColor">backgroundColor</option>
+                <option value="borderRadius">borderRadius</option>
+                <option value="transform">transform</option>
+                <option value="width">width</option>
+            </select>
+
+        </div>
+        <div class="form-group">
+            <label for="feed">Feed</label>
+            <select name="feed" id="feed"></select>
+        </div>
+        <div class="form-group">
+            <label for="default">Default</label>
+            <select name="default" id="default" disabled></select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="pulse-anim">init</button>
+        </div>
+        <div class="lib-obj">
+            <span class="span-button">Object passed to follow.js</span>
+            <p class="pre"></p>
+        </div>
+        <div class="copyrights">
+            <p>Download
+                <a download="follow.min.js" href="https://raw.githubusercontent.com/vuksamardzic/follow.js/master/lib/follow.min.js">follow.min.js</a> or check
+                <a href="https://github.com/vuksamardzic/follow.js">GitHub</a>.</p>
+            <p class="author">Made by
+                <a href="https://github.com/vuksamardzic">Vuk Samardžić</a>.</p>
+        </div>
+    </form>
+</body>
+
+<script>
+    var $form = document.querySelector('form');
+    var $wedges = document.getElementById('wedges');
+    var $type = document.getElementById('type');
+    var $prop = document.getElementById('prop');
+    var propEl = document.querySelector('.prop');
+    var $feed = document.getElementById('feed');
+    var $default = document.getElementById('default');
+
+    var $submitButton = document.querySelector('.pulse-anim');
+    var $objButton = document.querySelector('.span-button');
+
+    $submitButton.addEventListener('click', function (ev) {
+        this.classList.contains('pulse-anim') ? this.classList.remove('pulse-anim') : '';
+        $objButton.style.display = 'inline-block';
+    });
+
+    var styleFeedValues = {
+        backgroundColor: [
+            'lime,green,aqua,teal,blue,navy,fuchsia,purple',
+            '#24ff7f,#d57865,#c4d21c,#7e8daf,#534201,#18a2f2,#d2dff4,#c6c0c3'
+        ],
+        borderRadius: [
+            '5px,10px,15px,20px,25px,30px,35px,40px',
+            '5%,10%,15%,20%,25%,30%,35%,40%'
+        ],
+        transform: [
+            'scale(0.5),scale(0.6),scale(0.7),scale(0.8),scale(0.9),scale(1),scale(1.1),scale(1.2)',
+            'rotate(30deg),rotate(60deg),rotate(90deg),rotate(120deg),rotate(150deg),rotate(180deg),rotate(210deg),rotate(240deg)'
+        ],
+        width: [
+            '100px,120px,140px,160px,180px,200px,220px,240px'
+        ]
+    };
+
+    var styleDefaultValues = {
+        backgroundColor: [
+            'black',
+            '#585858'
+        ],
+        borderRadius: [
+            '0',
+            '50%'
+        ],
+        transform: [
+            'scale(1.5)',
+            'rotate(0)'
+        ],
+        width: [
+            '150px'
+        ]
+    };
+
+    var textFeedValues = {
+        text: [
+            'one,two,three,four,five,six,seven,eight',
+            '1,2,3,4,5,6,7,8',
+            '100,200,300,400,500,600,700,800'
+        ]
+    };
+
+    var textDefaultValues = {
+        text: [
+            'center',
+            '0',
+            '1000'
+        ]
+    };
+
+    var optionHTML = function (arr) {
+        var optionArr = arr.map(function (i, index) {
+            i = i.split(',').slice(0, $wedges.value);
+            return '<option value="' + i + '">' + i + '</option>';
+        });
+
+        return optionArr.join('');
+    };
+
+    var followOptionObj = {};
+
+    $form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        followOptionObj = {
+            selector: '.box',
+            areas: parseInt($wedges.value),
+            prop: $prop.value && $type.value === 'style' ? $prop.value : undefined,
+            type: $type.value,
+            feed: $feed.value.split(','),
+            default: $default.value
+        }
+        document.querySelector('.pre').innerHTML = JSON.stringify(followOptionObj);
+        follow.init(followOptionObj);
+    });
+
+    $wedges.addEventListener('change', function (ev) {
+        if ($type.value === 'style') {
+            supplyOptions($prop.value);
+        } else {
+            supplyTextOptions();
+        }
+    });
+
+    $type.addEventListener('change', function (ev) {
+        if (ev.target.value === 'style') {
+            propEl.style.display = 'block';
+            supplyOptions($prop.value);
+        } else {
+            propEl.style.display = 'none';
+            supplyTextOptions();
+        }
+    });
+
+    $prop.addEventListener('change', function (ev) {
+        $feed.innerHTML = optionHTML(styleFeedValues[ev.target.value]);
+        $default.innerHTML = optionHTML(styleDefaultValues[ev.target.value]);
+        $default.selectedIndex = $feed.selectedIndex;
+    });
+
+    $feed.addEventListener('change', function (ev) {
+        $default.selectedIndex = ev.currentTarget.selectedIndex;
+    });
+
+    var supplyOptions = function (val) {
+        switch (val) {
+            case 'backgroundColor':
+                $feed.innerHTML = optionHTML(styleFeedValues[val]);
+                $default.innerHTML = optionHTML(styleDefaultValues[val]);
+                break;
+            case 'borderRadius':
+                $feed.innerHTML = optionHTML(styleFeedValues[val]);
+                $default.innerHTML = optionHTML(styleDefaultValues[val]);
+                break;
+            case 'transform':
+                $feed.innerHTML = optionHTML(styleFeedValues[val]);
+                $default.innerHTML = optionHTML(styleDefaultValues[val]);
+                break;
+            case 'width':
+                $feed.innerHTML = optionHTML(styleFeedValues[val]);
+                $default.innerHTML = optionHTML(styleDefaultValues[val]);
+                break;
+        }
+        $default.selectedIndex = $feed.selectedIndex;
+    };
+
+    var supplyTextOptions = function () {
+        $feed.innerHTML = optionHTML(textFeedValues['text']);
+        $default.innerHTML = optionHTML(textDefaultValues['text']);
+        $default.selectedIndex = $feed.selectedIndex;
+    };
+    supplyTextOptions();
+</script>
+
+</html>

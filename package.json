@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --open --mode development",
     "prod": "webpack --mode development --env dev && webpack --mode production --env prod",
-    "deploy": "./node_modules/.bin/webpack --mode production --env demo && surge -p ./demo -d followjs.surge.sh",
+    "deploy": "./node_modules/.bin/webpack --mode production --env demo",
     "init": "npm i -D babel-core babel-loader babel-preset-es2015 html-webpack-plugin webpack webpack-dev-server yargs"
   },
   "repository": {

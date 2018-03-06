@@ -10,9 +10,9 @@ if (env === 'prod') {
     filename = 'follow.min.js';
 } else if (env === 'demo') {
     filename = 'follow.min.js';
-    dir = 'demo';
+    dir = './';
     plugins.push(new HtmlWebpackPlugin({
-        template: './index.html',
+        template: './demo/index.html',
         minify: {
             minifyCSS: true,
             minifyJS: true,
@@ -21,7 +21,7 @@ if (env === 'prod') {
     }));
 } else if (env === undefined) {
     plugins.push(new HtmlWebpackPlugin({
-        template: './index.html'
+        template: './demo/index.html'
     }));
 }
 
