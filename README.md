@@ -3,6 +3,9 @@ Small library for tracking mouse movments :comet:
 
 [Demo](https://vuksamardzic.github.io/follow.js/)
 
+Now before we go into usage and examples i wanna explain how it actually works.
+![exampe 1](./demo/example-1.jpg?raw=true "example 1")
+
 ### Includes
 
 Before your closing ```<body>``` tag add:
