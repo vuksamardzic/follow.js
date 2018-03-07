@@ -18,7 +18,7 @@ One thing to be aware is when we set how many wedges we want in `areas` property
 ![exampe 6](./demo/example-6.jpg?raw=true "example 6")  
 That's about it for `type`:`'style'`, now let's explain `type`:`'text'`. In image below we can see how it would look in default state (`default`:`'innerText'`).  
 ![exampe 7](./demo/example-7.jpg?raw=true "example 7")  
-Once we start moving mouse text inside elent will be updated depending on wedge as we can see in following three pictures. Feed property in this case is (`feed`:`['1st wedge','2nd wedge','3rd wedge']`)  
+Once we start moving mouse text inside element will be updated depending on wedge as we can see in following three pictures. Feed property in this case is (`feed`:`['1st wedge','2nd wedge','3rd wedge']`)  
 ![exampe 8](./demo/example-8.jpg?raw=true "example 8")
 ![exampe 9](./demo/example-9.jpg?raw=true "example 9")
 ![exampe 10](./demo/example-10.jpg?raw=true "example 10")  
